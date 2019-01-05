@@ -31,6 +31,7 @@ class DeckList extends Component {
             id={deck.id}
             title={deck.title}
             cards={deck.cards}
+            navigation={this.props.navigation}
           />
         ))}
       </View>

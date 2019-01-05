@@ -1,14 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default props => {
   const { id, cards, title } = props;
   return (
     <View style={styles.deck}>
-      <Text style={styles.title}>
-        {title} {id}
-      </Text>
-      <Text>{cards} cards</Text>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('DeckDetail', { id })}
+      >
+        <Text style={styles.title}>
+          {title} {id}
+        </Text>
+        <Text>{cards} cards</Text>
+      </TouchableOpacity>
     </View>
   );
 };

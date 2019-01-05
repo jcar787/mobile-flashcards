@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, StatusBar, View } from 'react-native';
-import { DeckList } from './features/deck/';
+import { DeckList, DeckDetail } from './features/deck/';
 import { Constants } from 'expo';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 export default class App extends React.Component {
   render() {
@@ -14,7 +15,7 @@ export default class App extends React.Component {
             backgroundColor="#292477"
           />
         </View>
-        <DeckList />
+        <AppContainer />
       </View>
     );
   }
@@ -26,3 +27,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   }
 });
+
+const AppNavigator = createStackNavigator(
+  {
+    DeckList: {
+      screen: DeckList
+    },
+    DeckDetail: {
+      screen: DeckDetail
+    }
+  },
+  { initialRouteName: 'DeckList' }
+);
+
+const AppContainer = createAppContainer(AppNavigator);
