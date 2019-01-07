@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default props => {
-  const { id, cards, title } = props;
+  const { id, cards, title, navigation } = props;
   return (
     <View style={styles.deck}>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('DeckDetail', { id })}
+        onPress={() => navigation.navigate('DeckDetail', { id })}
       >
         <Text style={styles.title}>
           {title} {id}
