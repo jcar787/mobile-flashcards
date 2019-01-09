@@ -11,7 +11,7 @@ export default props => {
         <Text style={styles.title}>
           {title} {id}
         </Text>
-        <Text>{cards} cards</Text>
+        <Text style={styles.cards}>{cards} cards</Text>
       </TouchableOpacity>
     </View>
   );
@@ -19,14 +19,28 @@ export default props => {
 
 const styles = StyleSheet.create({
   deck: {
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: 'black',
-    marginTop: 5,
-    marginBottom: 5,
-    padding: 10
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    elevation: 1,
+    borderRadius: 10,
+    marginLeft: 75,
+    marginRight: 75,
+    marginBottom: 10,
+    marginTop: 10,
+    padding: 25
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+
+  cards: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginTop: 10
   }
 });

@@ -1,3 +1,5 @@
+import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import {
   createStackNavigator,
   createAppContainer,
@@ -11,20 +13,39 @@ const Tabs = createBottomTabNavigator(
     DeckList: {
       screen: DeckList,
       navigationOptions: {
-        tabBarLabel: 'Deck List'
+        tabBarLabel: 'Deck List',
+        title: 'Deck List'
       }
     },
     AddDeck: {
       screen: AddDeck,
       navigationOptions: {
-        tabBarLabel: 'Add Deck'
+        tabBarLabel: 'Add Deck',
+        title: 'Add Deck'
       }
     }
   },
   {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'DeckList') {
+          iconName = 'ios-list';
+        } else {
+          iconName = 'ios-add';
+        }
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      }
+    }),
     tabBarOptions: {
-      activeTintColor: '#FFF',
-      inactiveTintColor: '#CCC'
+      activeBackgroundColor: 'midnightblue',
+      activeTintColor: 'white',
+      inactiveBackgroundColor: 'white',
+      inactiveTintColor: 'midnightblue',
+      labelStyle: {
+        fontSize: 14
+      }
     }
   }
 );
