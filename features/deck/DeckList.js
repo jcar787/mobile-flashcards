@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     alignSelf: 'center',
+    color: 'midnightblue',
     marginTop: 20,
     marginBottom: 10,
     shadowOffset: { width: 0, height: 2 },

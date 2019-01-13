@@ -20,7 +20,8 @@ export default props => {
 const styles = StyleSheet.create({
   deck: {
     borderWidth: 3,
-    borderColor: 'black',
+    borderColor: 'midnightblue',
+    backgroundColor: 'midnightblue',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 1,
@@ -35,12 +36,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'white'
   },
 
   cards: {
     textAlign: 'center',
     fontSize: 18,
-    marginTop: 10
+    marginTop: 10,
+    color: 'white'
   }
 });
