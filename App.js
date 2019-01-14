@@ -1,26 +1,32 @@
 import React from 'react';
-import { StyleSheet, StatusBar, View, Text } from 'react-native';
+import { StyleSheet, StatusBar, View } from 'react-native';
 import { Constants } from 'expo';
+import { Provider } from 'react-redux';
 import { NavigationContainer } from './common/navigation';
+import configureStore from './store/configureStore';
+
+const store = configureStore();
 
 export default class App extends React.Component {
   render() {
     return (
-      <React.Fragment>
-        <View
-          style={{
-            height: Constants.statusBarHeight,
-            backgroundColor: 'midnightblue'
-          }}
-        >
-          <StatusBar
-            translucent
-            barStyle="light-content"
-            backgroundColor="midnightblue"
-          />
-        </View>
-        <NavigationContainer />
-      </React.Fragment>
+      <Provider store={store}>
+        <React.Fragment>
+          <View
+            style={{
+              height: Constants.statusBarHeight,
+              backgroundColor: 'midnightblue'
+            }}
+          >
+            <StatusBar
+              translucent
+              barStyle="light-content"
+              backgroundColor="midnightblue"
+            />
+          </View>
+          <NavigationContainer />
+        </React.Fragment>
+      </Provider>
     );
   }
 }

@@ -6,11 +6,9 @@ export default props => {
   return (
     <View style={styles.deck}>
       <TouchableOpacity
-        onPress={() => navigation.navigate('DeckDetail', { id })}
+        onPress={() => navigation.navigate('DeckDetail', { id, title })}
       >
-        <Text style={styles.title}>
-          {title} {id}
-        </Text>
+        <Text style={styles.title}>{title}</Text>
         <Text style={styles.cards}>{cards} cards</Text>
       </TouchableOpacity>
     </View>

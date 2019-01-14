@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import uuidv4 from 'uuid/v4';
 import {
   View,
   Text,
@@ -6,6 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
+import { addCardAction } from '../deck/deckActions';
 
 class AddCard extends Component {
   constructor(props) {
@@ -14,6 +17,20 @@ class AddCard extends Component {
       question: '',
       answer: ''
     };
+  }
+
+  onSubmit() {
+    const { dispatch, navigation } = this.props;
+    const { deckId } = navigation.state.params;
+    const card = {
+      id: uuidv4(),
+      question: this.state.question,
+      answer: this.state.answer
+    };
+    console.log('this is the deckID', deckId);
+
+    dispatch(addCardAction(deckId, card));
+    navigation.goBack();
   }
   render() {
     const { question, answer } = this.state;
@@ -36,7 +53,7 @@ class AddCard extends Component {
             onChangeText={answer => this.setState({ answer })}
           />
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => this.onSubmit()}>
           <Text style={styles.buttonText}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
@@ -109,4 +126,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddCard;
+export default connect()(AddCard);

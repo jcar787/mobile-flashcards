@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import uuidv4 from 'uuid/v4';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import { addDeckAction } from './deckActions';
 
 class AddDeck extends Component {
   constructor(props) {
@@ -9,7 +12,21 @@ class AddDeck extends Component {
       name: ''
     };
   }
-  onChange = e => {};
+  onSubmit = () => {
+    const { dispatch, navigation } = this.props;
+    const deck = {
+      id: uuidv4(),
+      name: this.state.name,
+      cards: []
+    };
+
+    this.setState({
+      name: ''
+    });
+
+    dispatch(addDeckAction(deck));
+    navigation.goBack();
+  };
   render() {
     const { name } = this.state;
     return (
@@ -23,7 +40,7 @@ class AddDeck extends Component {
             style={styles.input}
           />
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => this.onSubmit()}>
           <Text style={styles.buttonText}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
@@ -96,4 +113,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddDeck;
+export default connect()(AddDeck);

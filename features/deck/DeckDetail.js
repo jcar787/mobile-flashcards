@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { deleteDeckAction } from './deckActions';
 
 const styles = StyleSheet.create({
   container: {
@@ -41,15 +43,23 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 24,
     fontWeight: 'bold'
+  },
+  delete: {
+    color: 'red',
+    fontSize: 16
   }
 });
 
-export default props => {
-  const { navigation } = props;
-  const { id } = navigation.state.params;
+const onDelete = (dispatch, deckId, navigation) => {
+  dispatch(deleteDeckAction(deckId));
+  navigation.navigate('Home');
+};
+const DeckDetail = props => {
+  const { navigation, dispatch } = props;
+  const { id, title } = navigation.state.params;
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Deck Detail with id {id}</Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() => navigation.navigate('AddCard', { deckId: id })}
@@ -61,6 +71,11 @@ export default props => {
           <Text style={styles.buttonText}>Start Quiz</Text>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity onPress={() => onDelete(dispatch, id, navigation)}>
+        <Text style={styles.delete}>Delete</Text>
+      </TouchableOpacity>
     </View>
   );
 };
+
+export default connect()(DeckDetail);
