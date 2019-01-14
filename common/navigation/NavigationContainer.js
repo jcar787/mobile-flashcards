@@ -7,6 +7,7 @@ import {
 } from 'react-navigation';
 import { DeckList, DeckDetail, AddDeck } from '../../features/deck';
 import { AddCard } from '../../features/card';
+import Quiz from '../../features/quiz/Quiz';
 
 const Tabs = createBottomTabNavigator(
   {
@@ -62,6 +63,9 @@ const AppNavigator = createStackNavigator(
 
     AddCard: {
       screen: AddCard
+    },
+    Quiz: {
+      screen: Quiz
     }
   },
   { initialRouteName: 'Home' }

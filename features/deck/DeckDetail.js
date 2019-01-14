@@ -67,7 +67,10 @@ const DeckDetail = props => {
         >
           <Text style={styles.buttonText}>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Quiz', { deckId: id })}
+          style={styles.button}
+        >
           <Text style={styles.buttonText}>Start Quiz</Text>
         </TouchableOpacity>
       </View>
