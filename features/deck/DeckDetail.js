@@ -34,6 +34,22 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     marginLeft: 15
   },
+  buttonDisabled: {
+    borderColor: 'gray',
+    borderWidth: 2,
+    borderRadius: 3,
+    marginLeft: 15
+  },
+  buttonTextDisabled: {
+    borderColor: 'gray',
+    borderWidth: 2,
+    borderRadius: 3,
+    backgroundColor: 'gray',
+    color: 'white',
+    padding: 10,
+    fontSize: 24,
+    fontWeight: 'bold'
+  },
   buttonText: {
     borderColor: 'midnightblue',
     borderWidth: 2,
@@ -55,7 +71,7 @@ const onDelete = (dispatch, deckId, navigation) => {
   navigation.navigate('Home');
 };
 const DeckDetail = props => {
-  const { navigation, dispatch } = props;
+  const { cardsLength, navigation, dispatch } = props;
   const { id, title } = navigation.state.params;
   return (
     <View style={styles.container}>
@@ -68,10 +84,21 @@ const DeckDetail = props => {
           <Text style={styles.buttonText}>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Quiz', { deckId: id })}
-          style={styles.button}
+          disabled={cardsLength === 0}
+          onPress={() => {
+            if (cardsLength > 0) {
+              navigation.navigate('Quiz', { deckId: id });
+            }
+          }}
+          style={cardsLength > 0 ? styles.button : styles.buttonDisabled}
         >
-          <Text style={styles.buttonText}>Start Quiz</Text>
+          <Text
+            style={
+              cardsLength > 0 ? styles.buttonText : styles.buttonTextDisabled
+            }
+          >
+            Start Quiz
+          </Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => onDelete(dispatch, id, navigation)}>
@@ -81,4 +108,15 @@ const DeckDetail = props => {
   );
 };
 
-export default connect()(DeckDetail);
+const mapStateToProps = (state, props) => {
+  const { navigation } = props;
+  const { id } = navigation.state.params;
+  const [deck] = state.deck.decks.filter(deck => deck.id === id);
+  const cardsLength = deck.cards.length;
+
+  return {
+    cardsLength
+  };
+};
+
+export default connect(mapStateToProps)(DeckDetail);
