@@ -7,7 +7,7 @@ import {
 } from 'react-navigation';
 import { DeckList, DeckDetail, AddDeck } from '../../features/deck';
 import { AddCard } from '../../features/card';
-import Quiz from '../../features/quiz/';
+import { Quiz } from '../../features/quiz/';
 
 const Tabs = createBottomTabNavigator(
   {
