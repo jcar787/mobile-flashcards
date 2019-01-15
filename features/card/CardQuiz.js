@@ -9,7 +9,7 @@ export default props => {
     changeShowAnswer,
     showAnswer
   } = props;
-  console.log(card);
+
   return (
     <View>
       <Text style={styles.title}>

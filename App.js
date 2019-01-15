@@ -4,10 +4,15 @@ import { Constants } from 'expo';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from './common/navigation';
 import configureStore from './store/configureStore';
+import { setLocalNotifications } from './common/utils/localNotifications';
 
 const store = configureStore();
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotifications();
+  }
+
   render() {
     return (
       <Provider store={store}>

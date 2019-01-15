@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { CardQuiz } from '../card';
+import {
+  clearLocalNotifications,
+  setLocalNotifications
+} from '../../common/utils/localNotifications';
 
 class Quiz extends Component {
   constructor(props) {
@@ -49,6 +53,7 @@ class Quiz extends Component {
           quizCompleted: true
         };
       });
+      clearLocalNotifications().then(setLocalNotifications);
     }
   }
 
@@ -64,6 +69,7 @@ class Quiz extends Component {
       this.setState({
         quizCompleted: true
       });
+      clearLocalNotifications().then(setLocalNotifications);
     }
   }
 
